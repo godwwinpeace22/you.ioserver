@@ -1,0 +1,32 @@
+extends dashboard
+block dashboard
+  h1 Create a new article
+  
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
+  form(method='POST', enctype="multipart/form-data", target='')
+    .form-group
+      label Title
+      input.form-control(name='title', type='text', placeholder='Enter title of article' required)
+    .form-group
+      label Body
+      textarea.form-control(name='body', type='textarea', placeholder='Enter the body of the article' required)
+    .form-group
+      label Category
+      select.form-control(name='category', placeholder='select category' required)
+        option health and fitness
+        option science and technology
+        option nature
+        option politics
+        option religion and spirituality
+        option programming
+    .form-group
+      label Tags
+      input.form-control(name='tags', type='text', placeholder='Enter comma separated tags' required)
+    .form-group
+      label Cover Image
+      input.form-control(name='avatar', type='file', accept='.png, .jpg, .jpeg', defaultValue='noImg.png' required)
+    .form-group
+      input.btn.btn-primary(name='submit', type='submit')

@@ -1,0 +1,20 @@
+extends dashboard
+block dashboard
+	.col-sm-12(style='padding-left:0px;padding-right:0px;')
+		.form-group
+			input.form-control(type="search" placeholder="Search articles")
+	if(articles)
+		if(articles.length == 0)
+			p No articles
+		each article in articles
+			.wel.col-sm-12
+				h5: b: a(href="#") #{article.title}
+				p #{article.body}
+				hr(style='margin-top:0px;margin-bottom:3px;')
+				span.pull-left
+					span: a(href="#") Edit   
+					span: a(href="#") Likes   
+					span: a(href="#")   Shares   
+				span.pull-right
+					span: a(href="#") Delete
+		

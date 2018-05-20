@@ -1,0 +1,13 @@
+extends layout
+block content
+  h1 Please #{title}
+  if errors
+    each error in errors
+      p.bg.danger!=error.msg
+  form(method='POST', action='')
+    .form-group
+      input.form-control(name='username', type='text', placeholder='username')
+    .form-group
+      input.form-control(name='password', type='password', placeholder='password')
+    .form-group
+      input.btn.btn-primary(name='login', type='submit', value='Login')

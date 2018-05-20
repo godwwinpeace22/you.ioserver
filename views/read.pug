@@ -1,0 +1,43 @@
+extends layout
+block content
+  .read.col-sm-12(liked=liked)
+    img(src='/uploads/' + article.imgUrl, style='width:100%;height:300px')
+    h2 #{article.title}
+    div.row
+      div.col-md-12
+        p #{article.body}
+        p
+          span.badge.likesNo #{article.likes.length}
+          if(liked == true)
+            button.btn.btn-default#like(style='margin-right:5px;' user=isLoggedIn ? isLoggedIn.username : '' articleId=article._id) Liked
+          if(liked == false)
+            button.btn.btn-primary#like(style='margin-right:5px;' user=isLoggedIn ? isLoggedIn.username : '' articleId=article._id) Like
+          button.btn.btn-primary#share Share
+    div.row
+      div.col-md-12
+        span=article.date
+        span=article.author.name
+        span=article.category
+        span=article.tags 
+    if(loginMsg)
+      p.alert.alert-danger=loginMsg
+    h3 comments
+    hr
+    for comment in comments
+      p
+        span
+          b #{comment.title} 
+        i by 
+        span #{comment.commenter.name}
+      p #{comment.commentBody}
+      i #{comment.date}
+    hr
+    h3 Write a comment
+    form(action="", method="POST")
+      .form-group
+        input.form-control(name='title', type='text', placeholder='Enter title of your comment', required)
+      .form-group
+        textarea.form-control(name='commentBody', placeholder='Write your comment', required)
+      .form-group
+        input.btn.btn-primary(type='submit', value='post comment', name='submitComment')
+      

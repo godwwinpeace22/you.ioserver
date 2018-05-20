@@ -1,0 +1,75 @@
+doctype html
+html(lang='en_us')
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/index.css')
+  body
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') WriteUp
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li(class=(title == 'Articles' ? 'active' : ''))
+              a(href='/') Articles
+            if(isLoggedIn)
+              li(class=(title == 'Create' ? 'active' : ''))
+                a(href='/articles/create') Create
+            li.dropdown(class=(title == 'Categories' ? 'active' : ''))
+              a.dropdown-toggle(href='#', data-toggle="dropdown" ) Categories
+                span.caret
+                ul.dropdown-menu
+                  li: a(href="/articles/category/health-and-fitness") Health and fitness
+                  li: a(href="/articles/category/science-and-technology") Science and Technology
+                  li: a(href="/articles/category/nature") Nature
+                  li: a(href="/articles/category/politics") Politics
+                  li: a(href="/articles/category/religion-and-spirituality") Religion and Spirituality
+                  li: a(href="/articles/category/programming") Programming
+                  
+          ul.nav.navbar-nav.navbar-right
+            if(!isLoggedIn)
+              li(class=(title == 'Register' ? 'active' : ''))
+                a(href='/users/register') Register
+            if(!isLoggedIn)
+              li(class=(title == 'Login' ? 'active' : ''))
+                a(href='/users/login') Log In
+            if(isLoggedIn)
+              li.dropdown(class=(title == 'Categories' ? 'active' : ''))
+                a.dropdown-toggle(href='#', data-toggle="dropdown" )
+                  i.fas.fa-plus   
+                  span.caret
+                  ul.dropdown-menu
+                    li: a(href='/profile/' + isLoggedIn.username + '/create') New Article
+                    li: a(href="#") New Stuff
+                    li: a(href="#") Another New stuff
+                    
+            if(isLoggedIn)
+              li.dropdown(class=(title == 'Categories' ? 'active' : ''))
+                a.dropdown-toggle(href='#', data-toggle="dropdown" )
+                  img(src="/uploads/" + isLoggedIn.imgSrc alt="profile_img")
+                  span.caret
+                  ul.dropdown-menu
+                    li: a(href='/profile/' + isLoggedIn.username) #{isLoggedIn.username}
+                    hr
+                    li: a(href='/profile/' + isLoggedIn.username) Profile
+                    li: a(href="#notifications") Notification
+                    li: a(href="#settings") Settings
+                    hr
+                    li: a(href="#help") Help
+                    li: a(href="/users/logout") Signout
+            
+    .content.col-sm-10.col-sm-offset-1
+      h1.text-center WriteUp
+      hr
+      block content
+    script(defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js")
+    script(src='/javascripts/jquery-3.2.0.js')
+    script(src='/javascripts/bootstrap.js')
+    script(src='/javascripts/index.js')

@@ -1,0 +1,31 @@
+extends layout
+block content
+  h1 Please #{title}
+  if msg
+    ul
+      li!= msg
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
+  form(method='POST', target='' enctype='multipart/form-data')
+    .form-group
+      label Name
+      input.form-control(name='name', type='text', placeholder='Enter name')
+    .form-group
+      label Username
+      input.form-control(name='username', type='text', placeholder='Enter username')
+    .form-group
+      label Email
+      input.form-control(name='email', type='email', placeholder='Enter email')
+    .form-group
+      label Password
+      input.form-control(name='password', type='password', placeholder='Enter password')
+    .form-group
+      label Confirm Password
+      input.form-control(name='password2', type='password', placeholder='Confirm password')
+    .form-group
+      label Profile Image
+      input(type="file" name='profile' accept='.jpg,png,.jpeg' required)
+    .form-group
+      input.btn.btn-primary(name='register', type='submit')

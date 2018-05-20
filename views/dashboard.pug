@@ -1,0 +1,43 @@
+extends layout
+block content
+  link(rel="stylesheet", href="/stylesheets/dashboard.css")
+  .dashboard.col-sm-12
+    .profile.col-sm-3
+      .img(style='background-image:url(/uploads/'  + profile.imgSrc +')')
+      h3 #{profile.name}
+      p #{profile.username} #{following}
+      hr
+      if(isLoggedIn != '' && isLoggedIn != null && isLoggedIn != undefined)
+        script
+          -var p = profile.followers; // the follower array of the displayed/featured user
+          -var u = isLoggedIn._id; // the id of the loggedin user
+          -var following = p.indexOf(u) == -1 ? false : true;
+        if(following == true)
+          //p=following
+          //p=u
+          button.btn.btn-default.unfollow(userId=profile._id, username=profile.username) Following
+          button.btn.btn-primary.follow(userId=profile._id, username=profile.username style='display:none;') Follow
+        if(following == false && isLoggedIn.username != profile.username)
+          //p=following
+          //p=u
+          //p=profile.followers
+          button.btn.btn-primary.follow(userId=profile._id, username=profile.username) Follow
+          button.btn.btn-default.unfollow(userId=profile._id, username=profile.username style='display:none;') Following
+    .about.col-sm-9
+      .tabs
+        ul.list-inline
+          li
+            a(href="/profile/" + profile.username) Stat
+          li
+            a(href="/profile/" + profile.username + "/articles") Articles
+          li
+            a(href="/profile/" + profile.username  + "/followers") Followers
+            span.badge#follower_No #{profile.followers.length}
+          li
+            a(href="/profile/" + profile.username + "/following") Following
+            span.badge#following_No #{followingCount}
+          li
+            a(href="#") Friends
+        hr
+      block dashboard
+

@@ -1,0 +1,29 @@
+extends dashboard
+block dashboard
+	.followers.col-sm-12
+		if(TAfollowing)
+			if(TAfollowing.length == 0)
+				p 0 following
+			each follower in TAfollowing
+				div.clearfix(style='width:100%;margin-bottom:10px;')
+					.follwrbox.pull-left(style='width:50px;height:50px;background-color:grey;')
+						img(src=`/uploads/${follower.imgSrc}` alt="profle_img_for_follwr" style='width:100%;height:50px;border-radius:4px;')
+					p: a(href=`/profile/${follower.username}` style='margin-left:4px;text-transform:capitalize;margin-top:2%;').pull-left #{follower.name}
+					
+					if(isLoggedIn != undefined && isLoggedIn != null && isLoggedIn != '')
+						script
+							-var foo = follower.followers.indexOf(isLoggedIn._id)
+						if(foo != -1)
+							//p(style='font-size:20px;')=foo
+							buton.btn.btn-default.unfollow.pull-right(username=follower.username userId=follower._id style='margin-right:20%;margin-top:2%;') Following
+							buton.btn.btn-primary.follow.pull-right(username=follower.username userId=follower._id style='margin-right:20%;margin-top:2%;display:none;') Follow
+						
+						if(isLoggedIn.username == follower.username)
+							p.pull-right You
+						if(foo == -1 && isLoggedIn.username != follower.username)
+							//span=foo
+							buton.btn.btn-primary.follow.pull-right(username=follower.username userId=follower._id style='margin-right:20%;margin-top:2%;') Follow
+							buton.btn.btn-default.unfollow.pull-right(username=follower.username userId=follower._id style='margin-right:20%;margin-top:2%;display:none;') Following
+				hr
+			
+				

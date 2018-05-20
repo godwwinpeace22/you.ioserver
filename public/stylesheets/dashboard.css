@@ -1,0 +1,46 @@
+.content>h1,.content>hr{
+    display:none;
+}
+
+.dashboard{
+    background-color:ta;
+    padding-left:0px;
+    padding-right: 0px;
+}
+.dashboard .profile{
+    background-color: seashell;
+    min-height:100px;
+}
+.dashboard .profile .img{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height:200px;
+    border-radius: 4px;
+}
+.dashboard .profile img{
+    width:100%;
+    height:200px;
+    display:block;
+    border-radius:4px;
+}
+.dashboard .about{
+    background-color:azur;
+    min-height:100px;
+}
+
+.tabs ul li{
+    background:gree;
+    margin-right:10px;
+    padding:5px;
+}
+.tabs ul li a{
+    padding:5px;
+    color:#586069;
+}
+.tabs hr{margin-top:0px;}
+.wel{
+    border:1px solid #d8d0d0;
+    border-radius: 4px;
+    padding:15px;
+}
